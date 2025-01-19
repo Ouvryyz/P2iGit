@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://b7t0nh8fdr05p"]
+
+[ext_resource type="Texture2D" uid="uid://c6m58fnjupyi" path="res://Images/MapGPT.webp" id="1_utrfq"]
+[ext_resource type="Texture2D" uid="uid://dgwp0mh0mq0dx" path="res://Images/PlayerDesign.webp" id="2_7fw5t"]
+[ext_resource type="Texture2D" uid="uid://bfghjmvp6pkms" path="res://Images/Sprite-0001.png" id="3_g0ksu"]
+
+[node name="MapGpt" type="Sprite2D"]
+position = Vector2(556.5, 540.5)
+scale = Vector2(1.08691, 1.05566)
+texture = ExtResource("1_utrfq")
+
+[node name="PlayerDesign" type="Sprite2D" parent="."]
+position = Vector2(1041.02, 7.10453)
+texture = ExtResource("2_7fw5t")
+
+[node name="Sprite-0001" type="Sprite2D" parent="."]
+position = Vector2(1.84009, -0.473633)
+scale = Vector2(32.2875, 32.2072)
+texture = ExtResource("3_g0ksu")
