@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bfghjmvp6pkms"
-path="res://.godot/imported/Sprite-0001.png-fbf963f83e4fa47deea86dd153c142e5.ctex"
+uid="uid://cyjakd3hu0x81"
+path="res://.godot/imported/PlayerDesign4.webp-af2d3f746022d35327efb74186250e4c.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Images/Sprite-0001.png"
-dest_files=["res://.godot/imported/Sprite-0001.png-fbf963f83e4fa47deea86dd153c142e5.ctex"]
+source_file="res://Fighter/Sprites/PlayerDesign4.webp"
+dest_files=["res://.godot/imported/PlayerDesign4.webp-af2d3f746022d35327efb74186250e4c.ctex"]
 
 [params]
 

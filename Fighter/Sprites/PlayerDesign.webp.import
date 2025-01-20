@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://dgwp0mh0mq0dx"
-path="res://.godot/imported/PlayerDesign.webp-2321fe865b4743a9bd9d403dd72eb8be.ctex"
+path="res://.godot/imported/PlayerDesign.webp-f1a24dbe9a7e901f0732c8295b3ea496.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Images/PlayerDesign.webp"
-dest_files=["res://.godot/imported/PlayerDesign.webp-2321fe865b4743a9bd9d403dd72eb8be.ctex"]
+source_file="res://Fighter/Sprites/PlayerDesign.webp"
+dest_files=["res://.godot/imported/PlayerDesign.webp-f1a24dbe9a7e901f0732c8295b3ea496.ctex"]
 
 [params]
 
