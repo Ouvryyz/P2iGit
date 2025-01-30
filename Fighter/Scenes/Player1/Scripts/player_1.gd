@@ -4,7 +4,7 @@ class_name Player
 @export_range(0.0,1.0) var accel_factor : float = 01
 @export_range(0.0,1.0) var rotation_accel_factor : float = 01
 
-
+	
 @export var max_speed : float = 200.0
 var speed : float = 0.0
 
@@ -26,8 +26,6 @@ func _input(event: InputEvent) -> void:
 	print(direction)
 	if direction != Vector2.ZERO:
 		Last_direction = direction
-	
-
 
 
 
