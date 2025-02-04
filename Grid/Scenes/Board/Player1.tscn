@@ -1,9 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://bgg4mxqsbs7xc"]
-
-[ext_resource type="Texture2D" uid="uid://jda8r7m0kv57" path="res://Grid/Sprites/yellowCoin.png" id="1_j2bhx"]
-
-[node name="Player1" type="Node2D"]
-
-[node name="YellowCoin" type="Sprite2D" parent="."]
-texture_filter = 1
-texture = ExtResource("1_j2bhx")
