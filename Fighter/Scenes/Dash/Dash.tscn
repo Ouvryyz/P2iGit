@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://c2bbx8ef7bxqr"]
+[gd_scene load_steps=4 format=3 uid="uid://bk1g310jdm6h8"]
 
 [ext_resource type="Script" path="res://Fighter/Scenes/Dash/Scripts/dash.gd" id="1_7x2lm"]
 [ext_resource type="Texture2D" uid="uid://dtdqfahi8qso5" path="res://Fighter/Scenes/Dash/Sprites/PlayerDesign2.webp" id="2_1ui2p"]

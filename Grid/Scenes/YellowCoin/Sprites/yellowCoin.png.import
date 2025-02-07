@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://eys45rqbtcig"
-path="res://.godot/imported/Grille.png-52df24743c6512c9c1ae8dc4932c947e.ctex"
+uid="uid://jda8r7m0kv57"
+path="res://.godot/imported/yellowCoin.png-b19fa939980d652e64cf8ee91c32cfa8.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Grid/Sprites/Grille.png"
-dest_files=["res://.godot/imported/Grille.png-52df24743c6512c9c1ae8dc4932c947e.ctex"]
+source_file="res://Grid/Scenes/YellowCoin/Sprites/yellowCoin.png"
+dest_files=["res://.godot/imported/yellowCoin.png-b19fa939980d652e64cf8ee91c32cfa8.ctex"]
 
 [params]
 
