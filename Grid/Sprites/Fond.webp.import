@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://eys45rqbtcig"
-path="res://.godot/imported/Grille.png-713ccb30998027b019bb04bb249fd290.ctex"
+uid="uid://cgaharimrb3ls"
+path="res://.godot/imported/Fond.webp-adfb475f42104c2b5364bf9185859b7b.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Grid/Scenes/Level/Sprites/Grille.png"
-dest_files=["res://.godot/imported/Grille.png-713ccb30998027b019bb04bb249fd290.ctex"]
+source_file="res://Grid/Sprites/Fond.webp"
+dest_files=["res://.godot/imported/Fond.webp-adfb475f42104c2b5364bf9185859b7b.ctex"]
 
 [params]
 

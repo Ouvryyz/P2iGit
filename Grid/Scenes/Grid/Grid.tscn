@@ -1,0 +1,72 @@
+[gd_scene load_steps=10 format=3 uid="uid://dnuke6tg3cgnv"]
+
+[ext_resource type="Script" path="res://Grid/Scenes/Grid/grid.gd" id="1_p5lf1"]
+[ext_resource type="Texture2D" uid="uid://eys45rqbtcig" path="res://Grid/Sprites/Grille.png" id="2_2nxgq"]
+[ext_resource type="PackedScene" uid="uid://bp7n8i7fmeact" path="res://Grid/Scenes/YellowCoin/YellowCoin.tscn" id="3_4icps"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bffie"]
+size = Vector2(367, 20)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dvj3y"]
+size = Vector2(15, 321.5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_nd8kd"]
+size = Vector2(10, 311)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_uuw5u"]
+size = Vector2(10, 310)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3551e"]
+size = Vector2(10, 311)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2udhq"]
+size = Vector2(10, 311)
+
+[node name="Grid" type="Node2D"]
+script = ExtResource("1_p5lf1")
+
+[node name="Grille" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(185, 160)
+texture = ExtResource("2_2nxgq")
+
+[node name="Border" type="Area2D" parent="."]
+
+[node name="Border_down" type="CollisionShape2D" parent="Border"]
+position = Vector2(183.5, 315)
+shape = SubResource("RectangleShape2D_bffie")
+
+[node name="Border1" type="CollisionShape2D" parent="Border"]
+position = Vector2(7.5, 160.75)
+shape = SubResource("RectangleShape2D_dvj3y")
+
+[node name="Border2" type="CollisionShape2D" parent="Border"]
+position = Vector2(60, 155.5)
+shape = SubResource("RectangleShape2D_nd8kd")
+
+[node name="Border3" type="CollisionShape2D" parent="Border"]
+position = Vector2(160, 155)
+shape = SubResource("RectangleShape2D_uuw5u")
+
+[node name="Border4" type="CollisionShape2D" parent="Border"]
+position = Vector2(110, 155.5)
+shape = SubResource("RectangleShape2D_3551e")
+
+[node name="Border5" type="CollisionShape2D" parent="Border"]
+position = Vector2(210, 155.5)
+shape = SubResource("RectangleShape2D_2udhq")
+
+[node name="Border6" type="CollisionShape2D" parent="Border"]
+position = Vector2(260, 156)
+shape = SubResource("RectangleShape2D_uuw5u")
+
+[node name="Border7" type="CollisionShape2D" parent="Border"]
+position = Vector2(310, 156)
+shape = SubResource("RectangleShape2D_uuw5u")
+
+[node name="Border8" type="CollisionShape2D" parent="Border"]
+position = Vector2(362, 158)
+shape = SubResource("RectangleShape2D_nd8kd")
+
+[node name="YellowCoin" parent="." instance=ExtResource("3_4icps")]
+position = Vector2(35, 285)

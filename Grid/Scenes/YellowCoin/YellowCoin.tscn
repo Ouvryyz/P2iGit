@@ -6,14 +6,12 @@
 [sub_resource type="CircleShape2D" id="CircleShape2D_5qxgw"]
 radius = 20.0
 
-[node name="YellowCoin" type="CharacterBody2D"]
+[node name="YellowCoin" type="RigidBody2D"]
 script = ExtResource("1_kqfus")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture_filter = 1
-position = Vector2(300, 86)
 texture = ExtResource("2_b7dqp")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(300, 86)
 shape = SubResource("CircleShape2D_5qxgw")

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://yxus1ohjpxq5"
-path="res://.godot/imported/RowHover.png-6c77ea72fcb1a958c20014d1916031ca.ctex"
+uid="uid://eys45rqbtcig"
+path="res://.godot/imported/Grille.png-52df24743c6512c9c1ae8dc4932c947e.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Grid/Sprites/RowHover.png"
-dest_files=["res://.godot/imported/RowHover.png-6c77ea72fcb1a958c20014d1916031ca.ctex"]
+source_file="res://Grid/Sprites/Grille.png"
+dest_files=["res://.godot/imported/Grille.png-52df24743c6512c9c1ae8dc4932c947e.ctex"]
 
 [params]
 
