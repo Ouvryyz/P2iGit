@@ -2,7 +2,9 @@
 
 [ext_resource type="Script" path="res://Grid/Scenes/Grid/grid.gd" id="1_p5lf1"]
 [ext_resource type="Texture2D" uid="uid://eys45rqbtcig" path="res://Grid/Sprites/Grille.png" id="2_2nxgq"]
-[ext_resource type="PackedScene" uid="uid://bp7n8i7fmeact" path="res://Grid/Scenes/YellowCoin/YellowCoin.tscn" id="3_4icps"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_sa3fq"]
+bounce = 0.15
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bffie"]
 size = Vector2(367, 20)
@@ -30,7 +32,10 @@ texture_filter = 1
 position = Vector2(185, 160)
 texture = ExtResource("2_2nxgq")
 
-[node name="Border" type="Area2D" parent="."]
+[node name="Border" type="StaticBody2D" parent="."]
+physics_interpolation_mode = 2
+collision_mask = 3
+physics_material_override = SubResource("PhysicsMaterial_sa3fq")
 
 [node name="Border_down" type="CollisionShape2D" parent="Border"]
 position = Vector2(183.5, 315)
@@ -67,6 +72,3 @@ shape = SubResource("RectangleShape2D_uuw5u")
 [node name="Border8" type="CollisionShape2D" parent="Border"]
 position = Vector2(362, 158)
 shape = SubResource("RectangleShape2D_nd8kd")
-
-[node name="YellowCoin" parent="." instance=ExtResource("3_4icps")]
-position = Vector2(35, 285)

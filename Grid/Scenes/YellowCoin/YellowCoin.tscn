@@ -1,17 +1,25 @@
 [gd_scene load_steps=4 format=3 uid="uid://bp7n8i7fmeact"]
 
-[ext_resource type="Script" path="res://Grid/Scenes/YellowCoin/Scripts/yellow_coin.gd" id="1_kqfus"]
 [ext_resource type="Texture2D" uid="uid://jda8r7m0kv57" path="res://Grid/Scenes/YellowCoin/Sprites/yellowCoin.png" id="2_b7dqp"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_5qxgw"]
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_aei6y"]
+bounce = 0.15
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_r2yb0"]
 radius = 20.0
+height = 50.0
 
 [node name="YellowCoin" type="RigidBody2D"]
-script = ExtResource("1_kqfus")
+collision_layer = 2
+collision_mask = 3
+physics_material_override = SubResource("PhysicsMaterial_aei6y")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture_filter = 1
 texture = ExtResource("2_b7dqp")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("CircleShape2D_5qxgw")
+position = Vector2(0, -5)
+shape = SubResource("CapsuleShape2D_r2yb0")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

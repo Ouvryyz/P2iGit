@@ -55,3 +55,4 @@ Use={
 [layer_names]
 
 2d_physics/layer_1="Border"
+2d_physics/layer_2="Coin"

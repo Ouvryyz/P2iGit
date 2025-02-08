@@ -1,25 +1,164 @@
-[gd_scene load_steps=6 format=3 uid="uid://d0bw0krvephcd"]
+[gd_scene load_steps=4 format=3 uid="uid://d0bw0krvephcd"]
 
 [ext_resource type="Script" path="res://Grid/Scenes/Game/game.gd" id="1_8g0fq"]
-[ext_resource type="Texture2D" uid="uid://cgaharimrb3ls" path="res://Grid/Sprites/Fond.webp" id="2_sv5pt"]
-[ext_resource type="Texture2D" uid="uid://eys45rqbtcig" path="res://Grid/Sprites/Grille.png" id="3_pqxpt"]
-[ext_resource type="Script" path="res://Grid/Scenes/Game/Logic.gd" id="4_gwdsm"]
-[ext_resource type="Script" path="res://Grid/Scenes/Game/Token.gd" id="4_uuk25"]
+[ext_resource type="PackedScene" uid="uid://dnuke6tg3cgnv" path="res://Grid/Scenes/Grid/Grid.tscn" id="2_48of4"]
+[ext_resource type="PackedScene" uid="uid://b2c2mja0nco7k" path="res://Grid/Scenes/SpawnCoin/SpawnCoin.tscn" id="3_saq3m"]
 
 [node name="Game" type="Node2D"]
 script = ExtResource("1_8g0fq")
 
-[node name="Fond" type="Sprite2D" parent="."]
-position = Vector2(320, 180)
-texture = ExtResource("2_sv5pt")
+[node name="Grid" parent="." instance=ExtResource("2_48of4")]
 
-[node name="Grid" type="Sprite2D" parent="."]
-texture_filter = 1
-position = Vector2(309, 177)
-texture = ExtResource("3_pqxpt")
-script = ExtResource("4_uuk25")
+[node name="SpawnCoin" parent="." instance=ExtResource("3_saq3m")]
+visible = false
 
-[node name="TokenContainer" type="Node2D" parent="."]
+[node name="Cells" type="Node2D" parent="."]
 
-[node name="Logic" type="Node2D" parent="."]
-script = ExtResource("4_gwdsm")
+[node name="cell_5_6" type="Marker2D" parent="Cells"]
+position = Vector2(335, 284)
+
+[node name="cell_5_5" type="Marker2D" parent="Cells"]
+position = Vector2(285, 284)
+
+[node name="cell_5_4" type="Marker2D" parent="Cells"]
+position = Vector2(235, 284)
+
+[node name="cell_5_3" type="Marker2D" parent="Cells"]
+position = Vector2(185, 284)
+
+[node name="cell_5_2" type="Marker2D" parent="Cells"]
+position = Vector2(135, 284)
+
+[node name="cell_5_1" type="Marker2D" parent="Cells"]
+position = Vector2(85, 284)
+
+[node name="cell_5_0" type="Marker2D" parent="Cells"]
+position = Vector2(35, 285)
+
+[node name="cell_4_6" type="Marker2D" parent="Cells"]
+position = Vector2(335, 234)
+
+[node name="cell_4_5" type="Marker2D" parent="Cells"]
+position = Vector2(285, 234)
+
+[node name="cell_4_4" type="Marker2D" parent="Cells"]
+position = Vector2(235, 234)
+
+[node name="cell_4_3" type="Marker2D" parent="Cells"]
+position = Vector2(185, 234)
+
+[node name="cell_4_2" type="Marker2D" parent="Cells"]
+position = Vector2(135, 234)
+
+[node name="cell_4_1" type="Marker2D" parent="Cells"]
+position = Vector2(85, 234)
+
+[node name="cell_4_0" type="Marker2D" parent="Cells"]
+position = Vector2(35, 235)
+
+[node name="cell_3_6" type="Marker2D" parent="Cells"]
+position = Vector2(335, 184)
+
+[node name="cell_3_5" type="Marker2D" parent="Cells"]
+position = Vector2(285, 184)
+
+[node name="cell_3_4" type="Marker2D" parent="Cells"]
+position = Vector2(235, 184)
+
+[node name="cell_3_3" type="Marker2D" parent="Cells"]
+position = Vector2(185, 184)
+
+[node name="cell_3_2" type="Marker2D" parent="Cells"]
+position = Vector2(135, 184)
+
+[node name="cell_3_1" type="Marker2D" parent="Cells"]
+position = Vector2(85, 184)
+
+[node name="cell_3_0" type="Marker2D" parent="Cells"]
+position = Vector2(35, 185)
+
+[node name="cell_2_6" type="Marker2D" parent="Cells"]
+position = Vector2(335, 136)
+
+[node name="cell_2_5" type="Marker2D" parent="Cells"]
+position = Vector2(285, 135)
+
+[node name="cell_2_4" type="Marker2D" parent="Cells"]
+position = Vector2(235, 135)
+
+[node name="cell_2_3" type="Marker2D" parent="Cells"]
+position = Vector2(185, 134)
+
+[node name="cell_2_2" type="Marker2D" parent="Cells"]
+position = Vector2(135, 135)
+
+[node name="cell_2_1" type="Marker2D" parent="Cells"]
+position = Vector2(85, 135)
+
+[node name="cell_2_0" type="Marker2D" parent="Cells"]
+position = Vector2(35, 135)
+
+[node name="cell_1_6" type="Marker2D" parent="Cells"]
+position = Vector2(335, 85)
+
+[node name="cell_1_5" type="Marker2D" parent="Cells"]
+position = Vector2(285, 85)
+
+[node name="cell_1_4" type="Marker2D" parent="Cells"]
+position = Vector2(235, 85)
+
+[node name="cell_1_3" type="Marker2D" parent="Cells"]
+position = Vector2(185, 85)
+
+[node name="cell_1_2" type="Marker2D" parent="Cells"]
+position = Vector2(135, 85)
+
+[node name="cell_1_1" type="Marker2D" parent="Cells"]
+position = Vector2(85, 85)
+
+[node name="cell_1_0" type="Marker2D" parent="Cells"]
+position = Vector2(35, 86)
+
+[node name="cell_0_6" type="Marker2D" parent="Cells"]
+position = Vector2(335, 35)
+
+[node name="cell_0_5" type="Marker2D" parent="Cells"]
+position = Vector2(285, 35)
+
+[node name="cell_0_4" type="Marker2D" parent="Cells"]
+position = Vector2(235, 35)
+
+[node name="cell_0_3" type="Marker2D" parent="Cells"]
+position = Vector2(185, 35)
+
+[node name="cell_0_2" type="Marker2D" parent="Cells"]
+position = Vector2(135, 35)
+
+[node name="cell_0_1" type="Marker2D" parent="Cells"]
+position = Vector2(85, 35)
+
+[node name="cell_0_0" type="Marker2D" parent="Cells"]
+position = Vector2(35, 35)
+
+[node name="Markers" type="Node2D" parent="."]
+
+[node name="Marker_0" type="Marker2D" parent="Markers"]
+position = Vector2(35, 0)
+
+[node name="Marker_1" type="Marker2D" parent="Markers"]
+position = Vector2(85, 0)
+
+[node name="Marker_2" type="Marker2D" parent="Markers"]
+position = Vector2(135, 0)
+
+[node name="Marker_3" type="Marker2D" parent="Markers"]
+position = Vector2(185, 0)
+
+[node name="Marker_4" type="Marker2D" parent="Markers"]
+position = Vector2(234, 0)
+
+[node name="Marker_5" type="Marker2D" parent="Markers"]
+position = Vector2(285, 0)
+
+[node name="Marker_6" type="Marker2D" parent="Markers"]
+position = Vector2(335, 0)
