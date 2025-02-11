@@ -43,7 +43,7 @@ func _input(event):
 
 
 func get_column_from_click(click_pos: Vector2) -> Variant:
-	var cell_width = 64.0  # Ajustez selon la largeur réelle de vos cellules en pixel art
+	var cell_width = 64.0  
 	var col = int((click_pos.x - grid.global_position.x + cell_width / 2) / cell_width)
 	if col < 0 or col >= COLS:
 		return null
