@@ -1,15 +1,16 @@
 [gd_scene load_steps=4 format=3 uid="uid://d0bw0krvephcd"]
 
-[ext_resource type="Script" path="res://Grid/Scenes/Game/game.gd" id="1_8g0fq"]
-[ext_resource type="PackedScene" uid="uid://dnuke6tg3cgnv" path="res://Grid/Scenes/Grid/Grid.tscn" id="2_48of4"]
-[ext_resource type="PackedScene" uid="uid://b2c2mja0nco7k" path="res://Grid/Scenes/SpawnCoin/SpawnCoin.tscn" id="3_saq3m"]
+[ext_resource type="Script" path="res://Grid/Scenes/Logic/logic.gd" id="1_2tlqv"]
+[ext_resource type="PackedScene" uid="uid://dnuke6tg3cgnv" path="res://Grid/Scenes/Grid/Grid.tscn" id="2_jxdwt"]
+[ext_resource type="PackedScene" uid="uid://b2c2mja0nco7k" path="res://Grid/Scenes/SpawnCoin/SpawnCoin.tscn" id="3_y377b"]
 
-[node name="Game" type="Node2D"]
-script = ExtResource("1_8g0fq")
+[node name="Logic" type="Node2D"]
+texture_filter = 1
+script = ExtResource("1_2tlqv")
 
-[node name="Grid" parent="." instance=ExtResource("2_48of4")]
+[node name="Grid" parent="." instance=ExtResource("2_jxdwt")]
 
-[node name="SpawnCoin" parent="." instance=ExtResource("3_saq3m")]
+[node name="SpawnCoin" parent="." instance=ExtResource("3_y377b")]
 visible = false
 
 [node name="Cells" type="Node2D" parent="."]
@@ -143,22 +144,93 @@ position = Vector2(35, 35)
 [node name="Markers" type="Node2D" parent="."]
 
 [node name="Marker_0" type="Marker2D" parent="Markers"]
-position = Vector2(35, 0)
+position = Vector2(35, 35)
 
 [node name="Marker_1" type="Marker2D" parent="Markers"]
-position = Vector2(85, 0)
+position = Vector2(85, 35)
 
 [node name="Marker_2" type="Marker2D" parent="Markers"]
-position = Vector2(135, 0)
+position = Vector2(135, 35)
 
 [node name="Marker_3" type="Marker2D" parent="Markers"]
-position = Vector2(185, 0)
+position = Vector2(185, 35)
 
 [node name="Marker_4" type="Marker2D" parent="Markers"]
-position = Vector2(234, 0)
+position = Vector2(235, 35)
 
 [node name="Marker_5" type="Marker2D" parent="Markers"]
-position = Vector2(285, 0)
+position = Vector2(285, 35)
 
 [node name="Marker_6" type="Marker2D" parent="Markers"]
-position = Vector2(335, 0)
+position = Vector2(335, 35)
+
+[node name="cols" type="Node2D" parent="."]
+
+[node name="col_1" type="Button" parent="cols"]
+modulate = Color(0.211765, 0.239216, 0.290196, 0)
+texture_filter = 1
+offset_left = -1.0
+offset_right = 59.0
+offset_bottom = 325.0
+
+[node name="col_2" type="Button" parent="cols"]
+modulate = Color(1, 1, 1, 0)
+offset_left = 60.0
+offset_right = 110.0
+offset_bottom = 325.0
+
+[node name="col_3" type="Button" parent="cols"]
+modulate = Color(1, 1, 1, 0)
+offset_left = 110.0
+offset_right = 160.0
+offset_bottom = 325.0
+
+[node name="col_4" type="Button" parent="cols"]
+self_modulate = Color(0.223529, 0.168627, 0.168627, 0)
+offset_left = 160.0
+offset_right = 210.0
+offset_bottom = 325.0
+
+[node name="col_5" type="Button" parent="cols"]
+modulate = Color(1, 1, 1, 0)
+offset_left = 210.0
+offset_right = 258.0
+offset_bottom = 325.0
+
+[node name="col_6" type="Button" parent="cols"]
+modulate = Color(1, 1, 1, 0)
+offset_left = 258.0
+offset_right = 311.0
+offset_bottom = 325.0
+
+[node name="col_7" type="Button" parent="cols"]
+modulate = Color(1, 1, 1, 0)
+offset_left = 311.0
+offset_right = 363.0
+offset_bottom = 325.0
+
+[node name="UI" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+rotation = -0.00115896
+
+[node name="PlayerTimer1" type="Timer" parent="UI"]
+
+[node name="PlayerTimer2" type="Timer" parent="UI"]
+
+[node name="Player1Label" type="Label" parent="UI"]
+layout_mode = 0
+offset_left = 385.0
+offset_top = 20.0
+offset_right = 452.0
+offset_bottom = 43.0
+text = "142"
+
+[node name="Player2Label" type="Label" parent="UI"]
+layout_mode = 0
+offset_left = 378.0
+offset_top = 47.0
+offset_right = 427.0
+offset_bottom = 70.0

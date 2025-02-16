@@ -13,13 +13,13 @@ size = Vector2(367, 20)
 size = Vector2(15, 321.5)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_nd8kd"]
-size = Vector2(10, 311)
+size = Vector2(10, 313.5)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_uuw5u"]
-size = Vector2(10, 310)
+size = Vector2(10, 311.5)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3551e"]
-size = Vector2(10, 311)
+size = Vector2(10, 313)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2udhq"]
 size = Vector2(10, 311)
@@ -54,7 +54,8 @@ position = Vector2(160, 155)
 shape = SubResource("RectangleShape2D_uuw5u")
 
 [node name="Border4" type="CollisionShape2D" parent="Border"]
-position = Vector2(110, 155.5)
+texture_filter = 1
+position = Vector2(110, 154.5)
 shape = SubResource("RectangleShape2D_3551e")
 
 [node name="Border5" type="CollisionShape2D" parent="Border"]
@@ -62,13 +63,13 @@ position = Vector2(210, 155.5)
 shape = SubResource("RectangleShape2D_2udhq")
 
 [node name="Border6" type="CollisionShape2D" parent="Border"]
-position = Vector2(260, 156)
+position = Vector2(260, 155.5)
 shape = SubResource("RectangleShape2D_uuw5u")
 
 [node name="Border7" type="CollisionShape2D" parent="Border"]
-position = Vector2(310, 156)
+position = Vector2(310, 155.75)
 shape = SubResource("RectangleShape2D_uuw5u")
 
 [node name="Border8" type="CollisionShape2D" parent="Border"]
-position = Vector2(362, 158)
+position = Vector2(362, 156.75)
 shape = SubResource("RectangleShape2D_nd8kd")

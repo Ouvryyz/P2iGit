@@ -1,20 +1,27 @@
-[gd_scene load_steps=4 format=3 uid="uid://cmb10nia4vdeg"]
+[gd_scene load_steps=5 format=3 uid="uid://cmb10nia4vdeg"]
 
 [ext_resource type="Script" path="res://Fighter/Scenes/Player1/Scripts/player_1.gd" id="1_thfdq"]
+[ext_resource type="PackedScene" uid="uid://d1rlt3xvr7qmk" path="res://Fighter/Scenes/Dash/Dash.tscn" id="2_bq546"]
 [ext_resource type="Texture2D" uid="uid://byk8e7s6kfc0x" path="res://Fighter/Scenes/Player1/Sprites/PlayerDesign1.webp" id="2_gwnjb"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_c65t0"]
-radius = 19.0
+[sub_resource type="CircleShape2D" id="CircleShape2D_1pk17"]
+radius = 20.2237
 
 [node name="Player1" type="CharacterBody2D"]
-position = Vector2(438, 271)
+rotation = 3.14159
+collision_layer = 4
+collision_mask = 4
 script = ExtResource("1_thfdq")
+dash_node = ExtResource("2_bq546")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="PlayerDesign1" type="Sprite2D" parent="."]
 texture_filter = 1
-position = Vector2(2, 0)
 texture = ExtResource("2_gwnjb")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-1, 0)
-shape = SubResource("CircleShape2D_c65t0")
+shape = SubResource("CircleShape2D_1pk17")
+
+[node name="GhostTimer" type="Timer" parent="."]
+wait_time = 0.001
+
+[connection signal="timeout" from="GhostTimer" to="." method="_on_ghost_timer_timeout"]

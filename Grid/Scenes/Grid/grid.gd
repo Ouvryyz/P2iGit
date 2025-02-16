@@ -1,11 +1,13 @@
 extends Node2D
 
+@onready var collision_shape = $Border/Border_down  # Remplace par le chemin exact de ta collision
 
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	pass # Replace with function body.
+func _input(event):
+	if event.is_action_pressed("test"):  # Remplace "test" par le nom de ton action
+		disable_collision()
 
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
+func disable_collision():
+	if collision_shape:
+		collision_shape.disabled = true
+		await get_tree().create_timer(0.5).timeout  # Attend 1 seconde
+		collision_shape.disabled = false

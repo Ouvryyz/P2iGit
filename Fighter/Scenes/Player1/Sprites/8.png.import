@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dtdqfahi8qso5"
-path="res://.godot/imported/PlayerDesign2.webp-f2a88c814b08b721ec3ae253acff4fd1.ctex"
+uid="uid://bwqd26d4jn7h8"
+path="res://.godot/imported/8.png-9e50838183a1eebe13fd81530ed2c417.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Fighter/Scenes/Dash/Sprites/PlayerDesign2.webp"
-dest_files=["res://.godot/imported/PlayerDesign2.webp-f2a88c814b08b721ec3ae253acff4fd1.ctex"]
+source_file="res://Fighter/Scenes/Player1/Sprites/8.png"
+dest_files=["res://.godot/imported/8.png-9e50838183a1eebe13fd81530ed2c417.ctex"]
 
 [params]
 

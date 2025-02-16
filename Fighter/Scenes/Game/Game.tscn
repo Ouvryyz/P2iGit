@@ -1,0 +1,13 @@
+[gd_scene load_steps=4 format=3 uid="uid://bv6ihyvsdswfl"]
+
+[ext_resource type="Script" path="res://Fighter/Scenes/Game/game.gd" id="1_ep31d"]
+[ext_resource type="PackedScene" uid="uid://cmb10nia4vdeg" path="res://Fighter/Scenes/Player1/Player1.tscn" id="2_cvphr"]
+[ext_resource type="PackedScene" uid="uid://dugmfx6mk4e6p" path="res://Fighter/Scenes/Player2/Player2.tscn" id="3_7aa7g"]
+
+[node name="Game" type="Node2D"]
+script = ExtResource("1_ep31d")
+
+[node name="Player1" parent="." instance=ExtResource("2_cvphr")]
+
+[node name="Player2" parent="." instance=ExtResource("3_7aa7g")]
+position = Vector2(230, 124)
