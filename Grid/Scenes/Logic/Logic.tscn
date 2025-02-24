@@ -1,12 +1,17 @@
-[gd_scene load_steps=4 format=3 uid="uid://d0bw0krvephcd"]
+[gd_scene load_steps=5 format=3 uid="uid://d0bw0krvephcd"]
 
 [ext_resource type="Script" path="res://Grid/Scenes/Logic/logic.gd" id="1_2tlqv"]
+[ext_resource type="Texture2D" uid="uid://cgaharimrb3ls" path="res://Grid/Sprites/Fond.webp" id="2_gdgvm"]
 [ext_resource type="PackedScene" uid="uid://dnuke6tg3cgnv" path="res://Grid/Scenes/Grid/Grid.tscn" id="2_jxdwt"]
 [ext_resource type="PackedScene" uid="uid://b2c2mja0nco7k" path="res://Grid/Scenes/SpawnCoin/SpawnCoin.tscn" id="3_y377b"]
 
 [node name="Logic" type="Node2D"]
 texture_filter = 1
 script = ExtResource("1_2tlqv")
+
+[node name="Fond" type="Sprite2D" parent="."]
+position = Vector2(320, 180)
+texture = ExtResource("2_gdgvm")
 
 [node name="Grid" parent="." instance=ExtResource("2_jxdwt")]
 

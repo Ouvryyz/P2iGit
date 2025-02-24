@@ -1,13 +1,18 @@
-[gd_scene load_steps=3 format=3 uid="uid://dugmfx6mk4e6p"]
+[gd_scene load_steps=5 format=3 uid="uid://dugmfx6mk4e6p"]
 
 [ext_resource type="Texture2D" uid="uid://58o7w60nfs3m" path="res://Fighter/Scenes/Player2/Sprites/Player2.webp" id="1_e1d7c"]
+[ext_resource type="Script" path="res://Fighter/Scenes/Player2/player_2.gd" id="1_pueqn"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ksiye"]
+size = Vector2(32, 32)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kjmwi"]
 size = Vector2(32, 32)
 
 [node name="Player2" type="CharacterBody2D"]
 collision_layer = 4
 collision_mask = 4
+script = ExtResource("1_pueqn")
 
 [node name="Player2" type="Sprite2D" parent="."]
 texture_filter = 1
@@ -15,3 +20,8 @@ texture = ExtResource("1_e1d7c")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_ksiye")
+
+[node name="HitboxArea" type="Area2D" parent="."]
+
+[node name="HitboxPlayer2" type="CollisionShape2D" parent="HitboxArea"]
+shape = SubResource("RectangleShape2D_kjmwi")

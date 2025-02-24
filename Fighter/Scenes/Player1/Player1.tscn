@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://cmb10nia4vdeg"]
+[gd_scene load_steps=11 format=3 uid="uid://cmb10nia4vdeg"]
 
 [ext_resource type="Script" path="res://Fighter/Scenes/Player1/Scripts/player_1.gd" id="1_thfdq"]
 [ext_resource type="PackedScene" uid="uid://d1rlt3xvr7qmk" path="res://Fighter/Scenes/Dash/Dash.tscn" id="2_bq546"]
@@ -6,6 +6,30 @@
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_1pk17"]
 radius = 20.2237
+
+[sub_resource type="Gradient" id="Gradient_lwnt6"]
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_we2u7"]
+gradient = SubResource("Gradient_lwnt6")
+
+[sub_resource type="Gradient" id="Gradient_w1tkm"]
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_0xdbt"]
+gradient = SubResource("Gradient_w1tkm")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_a06dl"]
+particle_flag_disable_z = true
+initial_velocity_min = 20.0
+initial_velocity_max = 50.0
+gravity = Vector3(0, -1, 0)
+scale_min = 2.0
+scale_max = 6.0
+color = Color(0.878906, 0.82655, 0.0411987, 1)
+color_ramp = SubResource("GradientTexture1D_0xdbt")
+color_initial_ramp = SubResource("GradientTexture1D_we2u7")
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_aj17m"]
+radius = 25.0
 
 [node name="Player1" type="CharacterBody2D"]
 rotation = 3.14159
@@ -22,6 +46,20 @@ texture = ExtResource("2_gwnjb")
 shape = SubResource("CircleShape2D_1pk17")
 
 [node name="GhostTimer" type="Timer" parent="."]
-wait_time = 0.001
+wait_time = 0.05
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+show_behind_parent = true
+emitting = false
+amount = 100
+process_material = SubResource("ParticleProcessMaterial_a06dl")
+trail_lifetime = 1.0
+
+[node name="HitboxArea" type="Area2D" parent="."]
+
+[node name="HitBoxPlayer1" type="CollisionShape2D" parent="HitboxArea"]
+shape = SubResource("CircleShape2D_aj17m")
 
 [connection signal="timeout" from="GhostTimer" to="." method="_on_ghost_timer_timeout"]
+[connection signal="body_entered" from="HitboxArea" to="." method="_on_hitbox_area_body_entered"]
+[connection signal="body_exited" from="HitboxArea" to="." method="_on_hitbox_area_body_exited"]
