@@ -52,7 +52,7 @@ func rotate_toward_click(mouse_pos: Vector2) -> void:
 
 func add_ghost():
 	var ghost = dash_node.instantiate()
-	ghost.set_property(position, $PlayerDesign1.scale)
+	ghost.set_property(position, $PlayerRed.scale)
 	get_tree().current_scene.add_child(ghost)
 
 func _on_ghost_timer_timeout() -> void:
@@ -88,4 +88,4 @@ func enemy_attack():
 
 
 func _on_attack_cooldown_timeout() -> void:
-	pass # Replace with function body.
+	enemy_cooldown = true

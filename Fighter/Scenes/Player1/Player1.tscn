@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://Fighter/Scenes/Player1/Scripts/player_1.gd" id="1_thfdq"]
 [ext_resource type="PackedScene" uid="uid://d1rlt3xvr7qmk" path="res://Fighter/Scenes/Dash/Dash.tscn" id="2_bq546"]
-[ext_resource type="Texture2D" uid="uid://byk8e7s6kfc0x" path="res://Fighter/Scenes/Player1/Sprites/PlayerDesign1.webp" id="2_gwnjb"]
+[ext_resource type="Texture2D" uid="uid://c2ig7xw4hsv2i" path="res://Fighter/Sprites/PlayerRed.webp" id="3_mntjs"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_1pk17"]
 radius = 20.2237
@@ -38,9 +38,9 @@ collision_mask = 4
 script = ExtResource("1_thfdq")
 dash_node = ExtResource("2_bq546")
 
-[node name="PlayerDesign1" type="Sprite2D" parent="."]
-texture_filter = 1
-texture = ExtResource("2_gwnjb")
+[node name="PlayerRed" type="Sprite2D" parent="."]
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("3_mntjs")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_1pk17")
@@ -60,6 +60,9 @@ trail_lifetime = 1.0
 [node name="HitBoxPlayer1" type="CollisionShape2D" parent="HitboxArea"]
 shape = SubResource("CircleShape2D_aj17m")
 
+[node name="Attack_cooldown" type="Timer" parent="."]
+
 [connection signal="timeout" from="GhostTimer" to="." method="_on_ghost_timer_timeout"]
 [connection signal="body_entered" from="HitboxArea" to="." method="_on_hitbox_area_body_entered"]
 [connection signal="body_exited" from="HitboxArea" to="." method="_on_hitbox_area_body_exited"]
+[connection signal="timeout" from="Attack_cooldown" to="." method="_on_attack_cooldown_timeout"]
