@@ -1,8 +1,48 @@
-[gd_scene load_steps=11 format=3 uid="uid://cmb10nia4vdeg"]
+[gd_scene load_steps=18 format=3 uid="uid://cmb10nia4vdeg"]
 
-[ext_resource type="Script" path="res://Fighter/Scenes/Player1/Scripts/player_1.gd" id="1_thfdq"]
+[ext_resource type="Script" path="res://Fighter/Scenes/Player1/player_1.gd" id="1_thfdq"]
 [ext_resource type="PackedScene" uid="uid://d1rlt3xvr7qmk" path="res://Fighter/Scenes/Dash/Dash.tscn" id="2_bq546"]
+[ext_resource type="Texture2D" uid="uid://b6b1pc2byhwkf" path="res://Fighter/Sprites/PlayerRedAttack1.webp" id="3_bde0v"]
 [ext_resource type="Texture2D" uid="uid://c2ig7xw4hsv2i" path="res://Fighter/Sprites/PlayerRed.webp" id="3_mntjs"]
+[ext_resource type="Texture2D" uid="uid://c4jw2wv1dls2y" path="res://Fighter/Sprites/PlayerRedAttack2.webp" id="4_n0iyg"]
+[ext_resource type="Texture2D" uid="uid://d1d73kwclin2i" path="res://Fighter/Sprites/PlayerRedAttack3.webp" id="5_58r38"]
+[ext_resource type="Texture2D" uid="uid://bxyfx0rt1my2" path="res://Fighter/Sprites/PlayerRedAttack4.webp" id="6_3a023"]
+[ext_resource type="Texture2D" uid="uid://drghl44o4vr3i" path="res://Fighter/Sprites/PlayerRedAttack5.webp" id="7_28gxd"]
+[ext_resource type="Texture2D" uid="uid://cg2igjs3bpbqi" path="res://Fighter/Sprites/PlayerRedAttack6.webp" id="8_nfjfl"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_lc1d8"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_bde0v")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_n0iyg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_58r38")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_3a023")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_28gxd")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_nfjfl")
+}],
+"loop": true,
+"name": &"attack",
+"speed": 12.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_mntjs")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_1pk17"]
 radius = 20.2237
@@ -34,13 +74,16 @@ radius = 25.0
 [node name="Player1" type="CharacterBody2D"]
 rotation = 3.14159
 collision_layer = 4
-collision_mask = 4
+collision_mask = 15
 script = ExtResource("1_thfdq")
 dash_node = ExtResource("2_bq546")
 
-[node name="PlayerRed" type="Sprite2D" parent="."]
+[node name="Player1" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
 scale = Vector2(0.5, 0.5)
-texture = ExtResource("3_mntjs")
+sprite_frames = SubResource("SpriteFrames_lc1d8")
+animation = &"idle"
+frame_progress = 0.39636
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_1pk17")
@@ -56,13 +99,18 @@ process_material = SubResource("ParticleProcessMaterial_a06dl")
 trail_lifetime = 1.0
 
 [node name="HitboxArea" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 11
 
 [node name="HitBoxPlayer1" type="CollisionShape2D" parent="HitboxArea"]
 shape = SubResource("CircleShape2D_aj17m")
 
 [node name="Attack_cooldown" type="Timer" parent="."]
+wait_time = 0.5
+one_shot = true
+
+[node name="attack" type="AnimationPlayer" parent="."]
 
 [connection signal="timeout" from="GhostTimer" to="." method="_on_ghost_timer_timeout"]
-[connection signal="body_entered" from="HitboxArea" to="." method="_on_hitbox_area_body_entered"]
-[connection signal="body_exited" from="HitboxArea" to="." method="_on_hitbox_area_body_exited"]
+[connection signal="area_entered" from="HitboxArea" to="." method="_on_hitbox_area_area_entered"]
 [connection signal="timeout" from="Attack_cooldown" to="." method="_on_attack_cooldown_timeout"]

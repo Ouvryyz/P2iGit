@@ -15,17 +15,23 @@ var speed : float = 0.0
 var direction := Vector2.ZERO
 var Last_direction := Vector2.ZERO
 
-var enemy_inattack_range = false
-var enemy_cooldown  = true 
-var health = 10
-var player_alive = true
+@onready var hitbox = $HitboxArea
+@onready var attack_cooldown = $Attack_cooldown
+@onready var anim_player = $Player1 
+
+
+var is_attacking = false
 
 func _ready() -> void:
-	pass
+	hitbox.monitoring = false  # Commence désactivé
+	hitbox.monitorable = true  # Peut être détecté par d'autres zones
+	await get_tree().create_timer(0.1).timeout  # Petit délai pour éviter les bugs d'initialisation
+	hitbox.monitoring = false  # S'assurer que la hitbox commence bien désactivée
 
 func _physics_process(delta: float) -> void:
 	move()
-	enemy_attack()
+	if not is_attacking and anim_player.animation == "attack":
+		anim_player.play("idle")  
 
 func _input(event: InputEvent) -> void:
 	direction=Input.get_vector("move_left","move_right","move_up","move_down")
@@ -35,6 +41,24 @@ func _input(event: InputEvent) -> void:
 		dash()
 	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
 		rotate_toward_click(event.position)
+		attack()
+
+func attack():
+	if is_attacking or not attack_cooldown.is_stopped():
+		return  
+
+	print("Attaque déclenchée")
+	is_attacking = true
+	hitbox.monitoring = true  # Active la hitbox
+	attack_cooldown.start()  # Démarre le cooldown
+
+	anim_player.play("attack")  # Joue l’animation d’attaque
+
+	await get_tree().create_timer(0.3).timeout  # Temps de l'attaque
+	hitbox.monitoring = false  # Désactive la hitbox
+	is_attacking = false
+
+
 func move()-> void:
 	
 	if direction == Vector2.ZERO :
@@ -69,23 +93,14 @@ func dash():
 	particles.emitting = false
 
 
-func _on_hitbox_area_body_entered(body: Node2D) -> void:
-	if body.has_method("enemy"):
-		enemy_inattack_range = true
 
+func _on_hitbox_area_area_entered(area: Area2D) -> void:
+	print("Zone touchée !", area)  # Vérifier si le signal est déclenché
+	if area.is_in_group("enemy"):
+		print("L'ennemi est touché !")
 
-func _on_hitbox_area_body_exited(body: Node2D) -> void:
-	if body.has_method("enemy"):
-		enemy_inattack_range = false
-
-func enemy_attack():
-	if enemy_inattack_range and enemy_cooldown == true:
-		health = health - 1
-		enemy_cooldown = false
-		$Attack_cooldown.start()
-		print(health)
-	
 
 
 func _on_attack_cooldown_timeout() -> void:
-	enemy_cooldown = true
+	print("Cooldown terminé, attaque possible")
+	is_attacking = false
