@@ -76,7 +76,7 @@ func rotate_toward_click(mouse_pos: Vector2) -> void:
 
 func add_ghost():
 	var ghost = dash_node.instantiate()
-	ghost.set_property(position, $PlayerRed.scale)
+	ghost.set_property(position, $Player1.scale)
 	get_tree().current_scene.add_child(ghost)
 
 func _on_ghost_timer_timeout() -> void:

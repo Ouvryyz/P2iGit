@@ -1,11 +1,16 @@
-[gd_scene load_steps=4 format=3 uid="uid://bv6ihyvsdswfl"]
+[gd_scene load_steps=5 format=3 uid="uid://bv6ihyvsdswfl"]
 
 [ext_resource type="Script" path="res://Fighter/Scenes/Game/game.gd" id="1_ep31d"]
 [ext_resource type="PackedScene" uid="uid://cmb10nia4vdeg" path="res://Fighter/Scenes/Player1/Player1.tscn" id="2_cvphr"]
 [ext_resource type="PackedScene" uid="uid://dugmfx6mk4e6p" path="res://Fighter/Scenes/Player2/Player2.tscn" id="3_7aa7g"]
+[ext_resource type="Texture2D" uid="uid://bfgiaytgude3b" path="res://Fighter/Sprites/MapIce.webp" id="4_ds1da"]
 
 [node name="Game" type="Node2D"]
 script = ExtResource("1_ep31d")
+
+[node name="MapIce" type="Sprite2D" parent="."]
+position = Vector2(319, 182)
+texture = ExtResource("4_ds1da")
 
 [node name="Player1" parent="." instance=ExtResource("2_cvphr")]
 
