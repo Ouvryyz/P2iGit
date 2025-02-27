@@ -10,23 +10,23 @@ extends Node2D
 const ROWS = 6
 const COLS = 7
 
-var grid = [] # Représente la grille du jeu
+var grid = [] 
 var current_player = "yellow"
-var player1_time_left: float = 30.0  # 5 minutes
-var player2_time_left: float = 30.0  # 5 minutes
+var player1_time_left: float = 30.0  
+var player2_time_left: float = 30.0  
 
 func _ready():
 	initialize_grid()
 	connect_buttons()
 	
-	# Configuration des Timers
+	
 	player1_timer.wait_time = 1.0
 	player1_timer.timeout.connect(_on_timer_timeout.bind("yellow"))
 	
 	player2_timer.wait_time = 1.0
 	player2_timer.timeout.connect(_on_timer_timeout.bind("red"))
 
-	# Lancer le timer du joueur jaune (1) au départ
+	
 	player1_timer.start()
 	_update_display()
 
@@ -35,7 +35,7 @@ func initialize_grid():
 	for i in range(ROWS):
 		grid.append([])
 		for j in range(COLS):
-			grid[i].append(null)  # Initialise la grille vide
+			grid[i].append(null)  
 
 func connect_buttons():
 	for i in range(1, COLS + 1):

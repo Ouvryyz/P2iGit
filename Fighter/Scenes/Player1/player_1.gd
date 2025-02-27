@@ -23,10 +23,10 @@ var Last_direction := Vector2.ZERO
 var is_attacking = false
 
 func _ready() -> void:
-	hitbox.monitoring = false  # Commence désactivé
-	hitbox.monitorable = true  # Peut être détecté par d'autres zones
-	await get_tree().create_timer(0.1).timeout  # Petit délai pour éviter les bugs d'initialisation
-	hitbox.monitoring = false  # S'assurer que la hitbox commence bien désactivée
+	hitbox.monitoring = false  
+	hitbox.monitorable = true  
+	await get_tree().create_timer(0.1).timeout 
+	hitbox.monitoring = false  
 
 func _physics_process(delta: float) -> void:
 	move()
@@ -49,13 +49,13 @@ func attack():
 
 	print("Attaque déclenchée")
 	is_attacking = true
-	hitbox.monitoring = true  # Active la hitbox
-	attack_cooldown.start()  # Démarre le cooldown
+	hitbox.monitoring = true 
+	attack_cooldown.start() 
 
-	anim_player.play("attack")  # Joue l’animation d’attaque
+	anim_player.play("attack") 
 
-	await get_tree().create_timer(0.3).timeout  # Temps de l'attaque
-	hitbox.monitoring = false  # Désactive la hitbox
+	await get_tree().create_timer(0.3).timeout 
+	hitbox.monitoring = false  
 	is_attacking = false
 
 
@@ -95,7 +95,7 @@ func dash():
 
 
 func _on_hitbox_area_area_entered(area: Area2D) -> void:
-	print("Zone touchée !", area)  # Vérifier si le signal est déclenché
+	print("Zone touchée !", area)  
 	if area.is_in_group("enemy"):
 		print("L'ennemi est touché !")
 

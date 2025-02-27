@@ -5,19 +5,19 @@ extends Node2D
 @onready var player1_label: Label = $Player1Label
 @onready var player2_label: Label = $Player2Label
 
-var player1_time_left: float = 300.0  # 5 minutes
-var player2_time_left: float = 300.0  # 5 minutes
-var current_player: int = 1  # 1 = joueur 1, 2 = joueur 2
+var player1_time_left: float = 300.0  
+var player2_time_left: float = 300.0  
+var current_player: int = 1  
 
 func _ready():
-	# Configuration des Timers
+	
 	player1_timer.wait_time = 1.0
 	player1_timer.timeout.connect(_on_timer_timeout.bind(1))
 	
 	player2_timer.wait_time = 1.0
 	player2_timer.timeout.connect(_on_timer_timeout.bind(2))
 
-	# Lancer le timer du joueur 1 au départ
+	
 	player1_timer.start()
 	_update_display()
 
