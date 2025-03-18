@@ -72,7 +72,7 @@ color_initial_ramp = SubResource("GradientTexture1D_we2u7")
 radius = 25.0
 
 [node name="Player1" type="CharacterBody2D"]
-rotation = 1.5708
+rotation = 3.14159
 collision_layer = 4
 collision_mask = 11
 script = ExtResource("1_thfdq")
@@ -80,10 +80,10 @@ dash_node = ExtResource("2_bq546")
 
 [node name="Player1" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
+rotation = 1.5708
 scale = Vector2(0.5, 0.5)
 sprite_frames = SubResource("SpriteFrames_lc1d8")
 animation = &"idle"
-frame_progress = 0.39636
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_1pk17")

@@ -8,8 +8,23 @@ var current_health: int = max_health
 var can_heal: bool = true
 @export var heal_cooldown_duration: float = 15.0
 
+# Recul du joueur lorsqu'il est touché
+var knockback_velocity := Vector2.ZERO
+@export var knockback_strength: float = 200.0  # Force du recul
+@export var knockback_decay: float = 0.9  # Facteur de ralentissement du recul (plus proche de 1 = ralenti lentement)
+
 func _ready() -> void:
 	current_health = max_health
+
+func _physics_process(delta: float) -> void:
+	# Appliquer le recul et le ralentir progressivement
+	if knockback_velocity.length() > 1.0:
+		velocity = knockback_velocity
+		knockback_velocity *= knockback_decay  # Réduit progressivement la force du recul
+	else:
+		velocity = Vector2.ZERO
+
+	move_and_slide()
 
 func _input(event: InputEvent) -> void:
 	# Lancer le soin si l'action "heal" est pressée et si le cooldown est terminé
@@ -40,15 +55,17 @@ func heal(amount: int) -> void:
 		current_health = max_health
 	print("Player2 soigné de ", amount, " points. Vie actuelle : ", current_health)
 
-
-func take_damage(damage: int) -> void:
+# Fonction qui applique des dégâts et déclenche le recul
+func take_damage(damage: int, attack_position: Vector2) -> void:
 	current_health -= damage
 	print("Player2 a reçu ", damage, " points de dégâts. Vie restante : ", current_health)
-	
-	# Vous pouvez ajouter ici un retour visuel (animation, flash, etc.)
+
+	# Calculer la direction du recul (opposée à l'attaque)
+	var knockback_direction = (global_position - attack_position).normalized()
+	knockback_velocity = knockback_direction * knockback_strength  # Appliquer la force du recul
+
 	if current_health <= 0:
 		die()
-
 
 func die() -> void:
 	print("Player2 est mort.")

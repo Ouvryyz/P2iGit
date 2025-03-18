@@ -20,8 +20,9 @@ var Last_direction := Vector2.ZERO
 
 var is_attacking = false
 
-
 var AttackScene = preload("res://Fighter/Scenes/Attack/Attack.tscn")
+var current_attack = null  # Variable pour stocker l'attaque en cours
+
 
 func _ready() -> void:
 	hitbox.monitoring = false  
@@ -31,6 +32,12 @@ func _ready() -> void:
 
 func _physics_process(delta: float) -> void:
 	move()
+	update_rotation()
+
+	# Si une attaque est active, mettre à jour sa position
+	if current_attack:
+		update_attack_position(current_attack)
+
 	if not is_attacking and anim_player.animation == "attack":
 		anim_player.play("idle")  
 
@@ -41,7 +48,6 @@ func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("Dash"):
 		dash()
 	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
-		rotate_toward_click(event.position)
 		attack()
 
 func attack():
@@ -52,15 +58,27 @@ func attack():
 	is_attacking = true
 	attack_cooldown.start() 
 
-	anim_player.play("attack") 
+	anim_player.play("attack")  
 
-
+	# Instancier l'attaque
 	var attack_instance = AttackScene.instantiate()
-	attack_instance.global_position = global_position + Last_direction.normalized() * 50  
-	get_parent().add_child(attack_instance)
+	
+	# Attacher l'attaque à Player1 pour qu'elle le suive
+	add_child(attack_instance)
+
+	# Placer l'attaque devant le joueur
+	update_attack_position(attack_instance)
+
+	# Garder une référence pour la mettre à jour chaque frame
+	current_attack = attack_instance
 
 	await get_tree().create_timer(0.3).timeout 
 	is_attacking = false
+	current_attack = null  # Supprime la référence une fois l'attaque terminée
+func update_attack_position(attack_instance):
+	if attack_instance:
+		attack_instance.global_position = global_position + Last_direction.normalized() * 50
+
 
 func move() -> void:
 	if direction == Vector2.ZERO:
@@ -71,11 +89,10 @@ func move() -> void:
 	velocity = Last_direction * speed
 	move_and_slide()
 
-func rotate_toward_click(mouse_pos: Vector2) -> void:
-	var world_mouse_pos = get_global_mouse_position()  
-	var angle = (world_mouse_pos - global_position).angle()  
-	rotation = angle  
-
+# 🔹 Nouvelle fonction : oriente le joueur en fonction des touches directionnelles
+func update_rotation() -> void:
+	if direction != Vector2.ZERO:
+		rotation = direction.angle()  # Aligne l'orientation sur la direction actuelle
 
 func add_ghost():
 	var ghost = dash_node.instantiate()
