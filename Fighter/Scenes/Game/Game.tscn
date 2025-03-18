@@ -1,18 +1,57 @@
-[gd_scene load_steps=5 format=3 uid="uid://bv6ihyvsdswfl"]
+[gd_scene load_steps=9 format=3 uid="uid://bv6ihyvsdswfl"]
 
 [ext_resource type="Script" path="res://Fighter/Scenes/Game/game.gd" id="1_ep31d"]
 [ext_resource type="PackedScene" uid="uid://cmb10nia4vdeg" path="res://Fighter/Scenes/Player1/Player1.tscn" id="2_cvphr"]
 [ext_resource type="PackedScene" uid="uid://dugmfx6mk4e6p" path="res://Fighter/Scenes/Player2/Player2.tscn" id="3_7aa7g"]
 [ext_resource type="Texture2D" uid="uid://bfgiaytgude3b" path="res://Fighter/Sprites/MapIce.webp" id="4_ds1da"]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8uwgr"]
+size = Vector2(20, 361)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_guouk"]
+size = Vector2(642, 20)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_07epb"]
+size = Vector2(641, 20)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_onfkr"]
+size = Vector2(54, 45)
+
 [node name="Game" type="Node2D"]
 script = ExtResource("1_ep31d")
 
 [node name="MapIce" type="Sprite2D" parent="."]
-position = Vector2(319, 182)
+texture_filter = 1
+position = Vector2(320, 180)
 texture = ExtResource("4_ds1da")
 
 [node name="Player1" parent="." instance=ExtResource("2_cvphr")]
+position = Vector2(308, 109)
+collision_mask = 9
 
 [node name="Player2" parent="." instance=ExtResource("3_7aa7g")]
-position = Vector2(230, 124)
+position = Vector2(307, 194)
+collision_mask = 5
+
+[node name="Wall" type="StaticBody2D" parent="."]
+position = Vector2(10, 179.5)
+collision_mask = 12
+
+[node name="wall01" type="CollisionShape2D" parent="Wall"]
+shape = SubResource("RectangleShape2D_8uwgr")
+
+[node name="wall02" type="CollisionShape2D" parent="Wall"]
+position = Vector2(622, 0.5)
+shape = SubResource("RectangleShape2D_8uwgr")
+
+[node name="wall03" type="CollisionShape2D" parent="Wall"]
+position = Vector2(315, -168.5)
+shape = SubResource("RectangleShape2D_guouk")
+
+[node name="wall04" type="CollisionShape2D" parent="Wall"]
+position = Vector2(312.5, 174.5)
+shape = SubResource("RectangleShape2D_07epb")
+
+[node name="iceBlock01" type="CollisionShape2D" parent="Wall"]
+position = Vector2(137, -84)
+shape = SubResource("RectangleShape2D_onfkr")

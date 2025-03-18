@@ -3,12 +3,11 @@ class_name Player
 
 @export var dash_node : PackedScene
 @onready var ghost_timer = $GhostTimer
-@onready var particles =$GPUParticles2D
+@onready var particles = $GPUParticles2D
 
-@export_range(0.0,1.0) var accel_factor : float = 01
-@export_range(0.0,1.0) var rotation_accel_factor : float = 01
+@export_range(0.0,1.0) var accel_factor : float = 0.1
+@export_range(0.0,1.0) var rotation_accel_factor : float = 0.1
 
-	
 @export var max_speed : float = 200.0
 var speed : float = 0.0
 
@@ -17,10 +16,12 @@ var Last_direction := Vector2.ZERO
 
 @onready var hitbox = $HitboxArea
 @onready var attack_cooldown = $Attack_cooldown
-@onready var anim_player = $Player1 
-
+@onready var anim_player = $Player1
 
 var is_attacking = false
+
+
+var AttackScene = preload("res://Fighter/Scenes/Attack/Attack.tscn")
 
 func _ready() -> void:
 	hitbox.monitoring = false  
@@ -34,7 +35,7 @@ func _physics_process(delta: float) -> void:
 		anim_player.play("idle")  
 
 func _input(event: InputEvent) -> void:
-	direction=Input.get_vector("move_left","move_right","move_up","move_down")
+	direction = Input.get_vector("move_left", "move_right", "move_up", "move_down")
 	if direction != Vector2.ZERO:
 		Last_direction = direction
 	if event.is_action_pressed("Dash"):
@@ -49,34 +50,36 @@ func attack():
 
 	print("Attaque déclenchée")
 	is_attacking = true
-	hitbox.monitoring = true 
 	attack_cooldown.start() 
 
 	anim_player.play("attack") 
 
+
+	var attack_instance = AttackScene.instantiate()
+	attack_instance.global_position = global_position + Last_direction.normalized() * 50  
+	get_parent().add_child(attack_instance)
+
 	await get_tree().create_timer(0.3).timeout 
-	hitbox.monitoring = false  
 	is_attacking = false
 
-
-func move()-> void:
-	
-	if direction == Vector2.ZERO :
-		speed=lerp(speed,0.0,accel_factor)	
-	else:	
-		speed=lerp(speed,max_speed,accel_factor)
-		
+func move() -> void:
+	if direction == Vector2.ZERO:
+		speed = lerp(speed, 0.0, accel_factor)    
+	else:    
+		speed = lerp(speed, max_speed, accel_factor)
 	
 	velocity = Last_direction * speed
 	move_and_slide()
 
 func rotate_toward_click(mouse_pos: Vector2) -> void:
-	var angle = (mouse_pos - global_position).angle()
-	rotation = angle
+	var world_mouse_pos = get_global_mouse_position()  
+	var angle = (world_mouse_pos - global_position).angle()  
+	rotation = angle  
+
 
 func add_ghost():
 	var ghost = dash_node.instantiate()
-	ghost.set_property(position, $Player1.scale)
+	ghost.position = $Player1.global_position
 	get_tree().current_scene.add_child(ghost)
 
 func _on_ghost_timer_timeout() -> void:
@@ -92,14 +95,10 @@ func dash():
 	ghost_timer.stop()
 	particles.emitting = false
 
-
-
 func _on_hitbox_area_area_entered(area: Area2D) -> void:
 	print("Zone touchée !", area)  
 	if area.is_in_group("enemy"):
 		print("L'ennemi est touché !")
-
-
 
 func _on_attack_cooldown_timeout() -> void:
 	print("Cooldown terminé, attaque possible")
