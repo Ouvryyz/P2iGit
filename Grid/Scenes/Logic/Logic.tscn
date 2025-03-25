@@ -1,9 +1,11 @@
-[gd_scene load_steps=5 format=3 uid="uid://d0bw0krvephcd"]
+[gd_scene load_steps=7 format=3 uid="uid://d0bw0krvephcd"]
 
 [ext_resource type="Script" path="res://Grid/Scenes/Logic/logic.gd" id="1_2tlqv"]
 [ext_resource type="Texture2D" uid="uid://cgaharimrb3ls" path="res://Grid/Sprites/Fond.webp" id="2_gdgvm"]
 [ext_resource type="PackedScene" uid="uid://dnuke6tg3cgnv" path="res://Grid/Scenes/Grid/Grid.tscn" id="2_jxdwt"]
 [ext_resource type="PackedScene" uid="uid://b2c2mja0nco7k" path="res://Grid/Scenes/SpawnCoin/SpawnCoin.tscn" id="3_y377b"]
+[ext_resource type="PackedScene" uid="uid://bp7n8i7fmeact" path="res://Grid/Scenes/YellowCoin/YellowCoin.tscn" id="5_rd43o"]
+[ext_resource type="PackedScene" uid="uid://brlpsvudnkbib" path="res://Grid/Scenes/Redcoin/RedCoin.tscn" id="6_xfhbl"]
 
 [node name="Logic" type="Node2D"]
 texture_filter = 1
@@ -239,3 +241,9 @@ offset_left = 378.0
 offset_top = 47.0
 offset_right = 427.0
 offset_bottom = 70.0
+
+[node name="YellowCoin" parent="." instance=ExtResource("5_rd43o")]
+position = Vector2(1585, 236)
+
+[node name="RedCoin" parent="." instance=ExtResource("6_xfhbl")]
+position = Vector2(1537, 242)

@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://cw1jpcssby0lg"]
+
+[ext_resource type="Script" path="res://GameController/game_controller.gd" id="1_sc6ct"]
+
+[node name="GameController" type="Node"]
+script = ExtResource("1_sc6ct")
+
+[node name="SceneHolder" type="Node" parent="."]

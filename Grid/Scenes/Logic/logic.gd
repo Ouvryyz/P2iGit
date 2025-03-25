@@ -17,8 +17,8 @@ var player2_time_left: float = 30.0
 
 func _ready():
 	initialize_grid()
+
 	connect_buttons()
-	
 	
 	player1_timer.wait_time = 1.0
 	player1_timer.timeout.connect(_on_timer_timeout.bind("yellow"))
@@ -26,9 +26,11 @@ func _ready():
 	player2_timer.wait_time = 1.0
 	player2_timer.timeout.connect(_on_timer_timeout.bind("red"))
 
-	
 	player1_timer.start()
 	_update_display()
+
+	for jeton in get_tree().get_nodes_in_group("Jetons"):
+		jeton.visible = true
 
 func initialize_grid():
 	grid = []
@@ -52,10 +54,10 @@ func drop_piece(column):
 			if cell_marker:
 				var spawn_pos = spawn_marker.global_position
 				if current_player == "yellow":
-					spawn_coin.yellowspawn(spawn_pos)
+					spawn_coin.yellowspawn(spawn_pos, self)
 					grid[row][column] = "yellow"
 				else:
-					spawn_coin.redspawn(spawn_pos)
+					spawn_coin.redspawn(spawn_pos, self)
 					grid[row][column] = "red"
 				
 				if check_win(row, column):
