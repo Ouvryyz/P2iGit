@@ -8,6 +8,8 @@ class_name Player
 @export_range(0.0,1.0) var accel_factor : float = 0.1
 @export_range(0.0,1.0) var rotation_accel_factor : float = 0.1
 
+@export var ShootScene = preload("res://Fighter/Scenes/Shoot/Shoot.tscn") 
+
 @export var max_speed : float = 200.0
 var speed : float = 0.0
 
@@ -49,6 +51,8 @@ func _input(event: InputEvent) -> void:
 		dash()
 	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
 		attack()
+	if Input.is_action_just_pressed("shoot"):
+		shoot_projectile()
 
 func attack():
 	if is_attacking or not attack_cooldown.is_stopped():
@@ -80,6 +84,24 @@ func update_attack_position(attack_instance):
 		attack_instance.global_position = global_position + Last_direction.normalized() * 50
 
 
+
+func shoot_projectile():
+	if not ShootScene:
+		print("Erreur : ShootScene non assignée !")
+		return
+
+	var projectile = ShootScene.instantiate()
+	get_parent().add_child(projectile)
+	projectile.global_position = global_position
+
+	# Tir dans la direction actuelle (rectiligne devant le joueur)
+	if Last_direction == Vector2.ZERO:
+		Last_direction = Vector2.RIGHT  # Valeur par défaut si jamais aucune direction n’est enregistrée
+
+	projectile.shoot_towards(global_position + Last_direction.normalized() * 100)
+
+
+
 func move() -> void:
 	if direction == Vector2.ZERO:
 		speed = lerp(speed, 0.0, accel_factor)    
@@ -89,11 +111,10 @@ func move() -> void:
 	velocity = Last_direction * speed
 	move_and_slide()
 
-# 🔹 Nouvelle fonction : oriente le joueur en fonction des touches directionnelles
+
 func update_rotation() -> void:
 	if direction != Vector2.ZERO:
-		rotation = direction.angle()  # Aligne l'orientation sur la direction actuelle
-
+		rotation = direction.angle()  
 func add_ghost():
 	var ghost = dash_node.instantiate()
 	ghost.position = $Player1.global_position
