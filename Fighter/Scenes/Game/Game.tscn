@@ -1,9 +1,14 @@
-[gd_scene load_steps=9 format=3 uid="uid://bv6ihyvsdswfl"]
+[gd_scene load_steps=14 format=3 uid="uid://bv6ihyvsdswfl"]
 
 [ext_resource type="Script" path="res://Fighter/Scenes/Game/game.gd" id="1_ep31d"]
 [ext_resource type="PackedScene" uid="uid://cmb10nia4vdeg" path="res://Fighter/Scenes/Player1/Player1.tscn" id="2_cvphr"]
-[ext_resource type="PackedScene" uid="uid://dugmfx6mk4e6p" path="res://Fighter/Scenes/Player2/Player2.tscn" id="3_7aa7g"]
 [ext_resource type="Texture2D" uid="uid://bfgiaytgude3b" path="res://Fighter/Sprites/MapIce.webp" id="4_ds1da"]
+[ext_resource type="PackedScene" uid="uid://c4omav0j645kr" path="res://Fighter/Scenes/Player2/Player2.tscn" id="4_ym1ql"]
+[ext_resource type="Texture2D" uid="uid://bw1p0eb4uj7rq" path="res://Fighter/Sprites/UICooldown.webp" id="5_3nc0f"]
+[ext_resource type="Texture2D" uid="uid://gje0joq8ct72" path="res://Fighter/Sprites/BarreViePlayerRed1.webp" id="5_dy2m6"]
+[ext_resource type="Texture2D" uid="uid://cu1n7bii7hc4o" path="res://Fighter/Sprites/BarreViePlayerYellow1 Copy1.webp" id="6_i8ifq"]
+[ext_resource type="Texture2D" uid="uid://bd7caft4l4cqi" path="res://Fighter/Sprites/Cooldwonmultiple4Red1.webp" id="6_n07n4"]
+[ext_resource type="Texture2D" uid="uid://c6p2tennhq04" path="res://Fighter/Sprites/Cooldwonmultiple4Yellow1.webp" id="7_uyccg"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8uwgr"]
 size = Vector2(20, 361)
@@ -12,7 +17,7 @@ size = Vector2(20, 361)
 size = Vector2(642, 20)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_07epb"]
-size = Vector2(641, 20)
+size = Vector2(642, 58)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_onfkr"]
 size = Vector2(54, 45)
@@ -24,34 +29,152 @@ script = ExtResource("1_ep31d")
 texture_filter = 1
 position = Vector2(320, 180)
 texture = ExtResource("4_ds1da")
+metadata/_edit_lock_ = true
 
 [node name="Player1" parent="." instance=ExtResource("2_cvphr")]
-position = Vector2(308, 109)
+position = Vector2(147, 180)
 collision_mask = 9
 
-[node name="Player2" parent="." instance=ExtResource("3_7aa7g")]
-position = Vector2(307, 194)
-collision_mask = 5
+[node name="Player2" parent="." instance=ExtResource("4_ym1ql")]
+position = Vector2(485, 182)
 
 [node name="Wall" type="StaticBody2D" parent="."]
 position = Vector2(10, 179.5)
 collision_mask = 12
+metadata/_edit_lock_ = true
 
 [node name="wall01" type="CollisionShape2D" parent="Wall"]
 shape = SubResource("RectangleShape2D_8uwgr")
+metadata/_edit_lock_ = true
 
 [node name="wall02" type="CollisionShape2D" parent="Wall"]
 position = Vector2(622, 0.5)
 shape = SubResource("RectangleShape2D_8uwgr")
+metadata/_edit_lock_ = true
 
 [node name="wall03" type="CollisionShape2D" parent="Wall"]
 position = Vector2(315, -168.5)
 shape = SubResource("RectangleShape2D_guouk")
+metadata/_edit_lock_ = true
 
 [node name="wall04" type="CollisionShape2D" parent="Wall"]
-position = Vector2(312.5, 174.5)
+position = Vector2(313, 155.5)
 shape = SubResource("RectangleShape2D_07epb")
+metadata/_edit_lock_ = true
+
+[node name="iceBlock04" type="CollisionShape2D" parent="Wall"]
+position = Vector2(469, 94.5)
+shape = SubResource("RectangleShape2D_onfkr")
+
+[node name="iceBlock03" type="CollisionShape2D" parent="Wall"]
+position = Vector2(468, -81.5)
+shape = SubResource("RectangleShape2D_onfkr")
+
+[node name="iceBlock02" type="CollisionShape2D" parent="Wall"]
+position = Vector2(137, 91.5)
+shape = SubResource("RectangleShape2D_onfkr")
 
 [node name="iceBlock01" type="CollisionShape2D" parent="Wall"]
-position = Vector2(137, -84)
+position = Vector2(138, -81.5)
 shape = SubResource("RectangleShape2D_onfkr")
+
+[node name="UiCooldown" type="Sprite2D" parent="Wall"]
+texture_filter = 1
+position = Vector2(310, 2)
+scale = Vector2(1, 1.00833)
+texture = ExtResource("5_3nc0f")
+metadata/_edit_lock_ = true
+
+[node name="Player2LifeBar" type="TextureRect" parent="."]
+texture_filter = 1
+offset_left = 472.0
+offset_top = 306.0
+offset_right = 626.0
+offset_bottom = 364.0
+texture = ExtResource("6_i8ifq")
+
+[node name="CooldownSpriteHeal2" type="TextureRect" parent="."]
+texture_filter = 1
+offset_left = 415.0
+offset_top = 316.0
+offset_right = 455.0
+offset_bottom = 356.0
+texture = ExtResource("7_uyccg")
+
+[node name="CooldownTimerLabelHeal2" type="Label" parent="CooldownSpriteHeal2"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CooldownSpriteDash2" type="TextureRect" parent="."]
+texture_filter = 1
+offset_left = 365.0
+offset_top = 315.0
+offset_right = 405.0
+offset_bottom = 355.0
+texture = ExtResource("7_uyccg")
+
+[node name="CooldownTimerLabelDash1" type="Label" parent="CooldownSpriteDash2"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Player1LifeBar" type="TextureRect" parent="."]
+texture_filter = 1
+offset_left = 4.0
+offset_top = 303.0
+offset_right = 158.0
+offset_bottom = 361.0
+texture = ExtResource("5_dy2m6")
+
+[node name="CooldownSpriteHeal1" type="TextureRect" parent="."]
+texture_filter = 1
+offset_left = 172.0
+offset_top = 312.0
+offset_right = 212.0
+offset_bottom = 352.0
+texture = ExtResource("6_n07n4")
+
+[node name="CooldownTimerLabelHeal1" type="Label" parent="CooldownSpriteHeal1"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 1.0
+offset_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CooldownSpriteDash1" type="TextureRect" parent="."]
+offset_left = 224.0
+offset_top = 313.0
+offset_right = 264.0
+offset_bottom = 353.0
+texture = ExtResource("6_n07n4")
+metadata/_edit_lock_ = true
+
+[node name="CooldownTimerLabelDash1" type="Label" parent="CooldownSpriteDash1"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_lock_ = true
+
+[node name="DefeatMessage" type="Label" parent="."]
+offset_left = 231.0
+offset_top = 121.0
+offset_right = 405.0
+offset_bottom = 210.0
+horizontal_alignment = 1
+vertical_alignment = 1

@@ -1,0 +1,100 @@
+[gd_scene load_steps=6 format=3 uid="uid://i3o0bei22miu"]
+
+[ext_resource type="Script" path="res://GameController/pause_menu.gd" id="1_cpf5h"]
+[ext_resource type="Texture2D" uid="uid://cgaharimrb3ls" path="res://Grid/Sprites/Fond.webp" id="2_qydfu"]
+[ext_resource type="Texture2D" uid="uid://bnut012c5cb73" path="res://Fighter/Sprites/Menurectangle.webp" id="3_r6jn8"]
+[ext_resource type="Texture2D" uid="uid://dlttyjj8n0ypm" path="res://Fighter/Sprites/Bouton.webp" id="4_nyxuk"]
+
+[sub_resource type="GDScript" id="GDScript_2nisl"]
+script/source = "extends Button
+
+func _ready():
+	pressed.connect(_on_button_pressed)
+
+func _on_button_pressed():
+	get_tree().change_scene_to_file(\"res://GameController/GameController.tscn\")
+"
+
+[node name="PauseMenu" type="CanvasLayer"]
+process_mode = 2
+script = ExtResource("1_cpf5h")
+
+[node name="Fond" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(320, 180)
+texture = ExtResource("2_qydfu")
+metadata/_edit_lock_ = true
+
+[node name="Menurectangle" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(321, 181)
+texture = ExtResource("3_r6jn8")
+metadata/_edit_lock_ = true
+
+[node name="Bouton" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(312, 184)
+texture = ExtResource("4_nyxuk")
+metadata/_edit_lock_ = true
+
+[node name="Bouton2" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(312, 299)
+texture = ExtResource("4_nyxuk")
+metadata/_edit_lock_ = true
+
+[node name="Bouton3" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(310, 242)
+texture = ExtResource("4_nyxuk")
+
+[node name="BtnQuitter" type="Button" parent="."]
+top_level = true
+texture_filter = 1
+anchors_preset = -1
+anchor_left = 0.339
+anchor_top = 0.411
+anchor_right = 0.612
+anchor_bottom = 0.5
+offset_left = 3.04001
+offset_top = 56.04
+offset_right = -3.67999
+offset_bottom = 59.0
+text = "Nouvelle partie"
+flat = true
+script = SubResource("GDScript_2nisl")
+
+[node name="ResolutionDropdown" type="OptionButton" parent="."]
+modulate = Color(1, 1, 1, 0)
+offset_left = 232.0
+offset_top = 263.0
+offset_right = 382.0
+offset_bottom = 295.0
+metadata/_edit_lock_ = true
+
+[node name="ResolutionLabel" type="Label" parent="."]
+texture_filter = 1
+offset_left = 246.0
+offset_top = 267.0
+offset_right = 363.0
+offset_bottom = 290.0
+text = "Résolution"
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_lock_ = true
+
+[node name="BtnReprendre" type="Button" parent="."]
+top_level = true
+texture_filter = 1
+anchors_preset = -1
+anchor_left = 0.339
+anchor_top = 0.411
+anchor_right = 0.612
+anchor_bottom = 0.5
+offset_left = 6.04001
+offset_top = -0.960007
+offset_right = -0.679993
+offset_bottom = 2.0
+text = "Reprendre"
+flat = true
+script = SubResource("GDScript_2nisl")

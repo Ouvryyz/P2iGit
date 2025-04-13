@@ -7,17 +7,26 @@ extends Node2D
 @onready var player1_label: Label = $UI/Player1Label
 @onready var player2_label: Label = $UI/Player2Label
 
+@onready var victory_popup = $VictoryPopup
+@onready var victory_label = $VictoryPopup/VictoryLabel
+
+signal game_won(winner: String)
+
+signal puissance4_finished(outcome: String) 
+
 const ROWS = 6
 const COLS = 7
 
 var grid = [] 
 var current_player = "yellow"
 var player1_time_left: float = 30.0  
-var player2_time_left: float = 30.0  
+var player2_time_left: float = 30.0
+var player1_score: int = 0
+var player2_score: int = 0
 
 func _ready():
 	initialize_grid()
-
+	restore_puissance4_state()
 	connect_buttons()
 	
 	player1_timer.wait_time = 1.0
@@ -31,6 +40,15 @@ func _ready():
 
 	for jeton in get_tree().get_nodes_in_group("Jetons"):
 		jeton.visible = true
+
+func _input(event: InputEvent):
+	if event.is_action_pressed("ui_cancel"):
+		var pause_menu = get_node_or_null("/root/PauseMenu")
+		if pause_menu:
+			pause_menu.show_pause()
+
+func _exit_tree():
+	save_game_state()
 
 func initialize_grid():
 	grid = []
@@ -62,6 +80,7 @@ func drop_piece(column):
 				
 				if check_win(row, column):
 					print(current_player + " wins!")
+					update_score(current_player)
 				
 				on_piece_spawn()
 
@@ -86,10 +105,10 @@ func check_win(row, column):
 	if not player:
 		return false
 	
-	return (check_direction(row, column, 1, 0, player) or  # Horizontal
-			check_direction(row, column, 0, 1, player) or  # Vertical
-			check_direction(row, column, 1, 1, player) or  # Diagonal /
-			check_direction(row, column, 1, -1, player))   # Diagonal \
+	return (check_direction(row, column, 1, 0, player) or  
+			check_direction(row, column, 0, 1, player) or  
+			check_direction(row, column, 1, 1, player) or 
+			check_direction(row, column, 1, -1, player))   
 
 func check_direction(row, column, d_row, d_col, player):
 	var count = 1
@@ -103,6 +122,19 @@ func check_direction(row, column, d_row, d_col, player):
 			r += d_row * dir
 			c += d_col * dir
 	return false
+
+func update_score(winner: String):
+	if winner == "yellow":
+		player1_score += 1
+	else:
+		player2_score += 1
+	
+	print("Score mis à jour : Jaune =", player1_score, " | Rouge =", player2_score)
+
+	if player1_score >= 1:
+		show_victory("Jaune")
+	elif player2_score >= 1:
+		show_victory("Rouge")
 
 func _on_col_pressed(column):
 	drop_piece(column)
@@ -120,8 +152,8 @@ func _on_timer_timeout(player: String):
 	_update_display()
 
 func _update_display():
-	player1_label.text = _format_time(player1_time_left)
-	player2_label.text = _format_time(player2_time_left)
+	player1_label.text = _format_time(player1_time_left) + " | Score: " + str(player1_score)
+	player2_label.text = _format_time(player2_time_left) + " | Score: " + str(player2_score)
 
 func _format_time(time_left: float) -> String:
 	var minutes = int(time_left) / 60
@@ -132,6 +164,41 @@ func _game_over(player: String):
 	print("Le joueur %s a perdu par le temps !" % player)
 	player1_timer.stop()
 	player2_timer.stop()
+	emit_signal("puissance4_finished", "timeout")
+
 
 func on_piece_spawn():
 	switch_player()
+
+func restore_puissance4_state():
+	for data in GameState.saved_jetons:
+		var pos = data["position"]
+		var coin_type = data["type"]
+		if coin_type == "YellowCoin":
+			spawn_coin.yellowspawn(pos, self)
+		elif coin_type == "RedCoin":
+			spawn_coin.redspawn(pos, self)
+		print("→ Spawn ", coin_type, " à ", pos)
+
+	current_player = GameState.current_player
+	player1_time_left = GameState.player1_time_left
+	player2_time_left = GameState.player2_time_left
+	player1_score = GameState.player1_score
+	player2_score = GameState.player2_score
+
+	print(">>> Restauration des jetons : ", GameState.saved_jetons)
+
+func save_game_state():
+	GameState.player1_time_left = player1_time_left
+	GameState.player2_time_left = player2_time_left
+	GameState.player1_score = player1_score
+	GameState.player2_score = player2_score
+
+func show_victory(winner: String):
+	player1_timer.stop()
+	player2_timer.stop()
+	victory_label.text = "Le joueur %s remporte la partie !" % winner
+	victory_popup.popup_centered()
+
+	await get_tree().create_timer(2.0).timeout
+	emit_signal("puissance4_finished", "victory")

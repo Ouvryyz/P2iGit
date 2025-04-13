@@ -1,0 +1,76 @@
+[gd_scene load_steps=6 format=3 uid="uid://c8o8021ber63d"]
+
+[ext_resource type="Texture2D" uid="uid://cgaharimrb3ls" path="res://Grid/Sprites/Fond.webp" id="1_4l452"]
+[ext_resource type="Script" path="res://GameController/menu.gd" id="1_vyri4"]
+[ext_resource type="Texture2D" uid="uid://bnut012c5cb73" path="res://Fighter/Sprites/Menurectangle.webp" id="2_svuvx"]
+[ext_resource type="Texture2D" uid="uid://dlttyjj8n0ypm" path="res://Fighter/Sprites/Bouton.webp" id="3_evd4d"]
+
+[sub_resource type="GDScript" id="GDScript_afwlv"]
+script/source = "extends Button
+
+func _ready():
+	pressed.connect(_on_button_pressed)
+
+func _on_button_pressed():
+	get_tree().change_scene_to_file(\"res://GameController/GameController.tscn\")
+"
+
+[node name="Menu" type="Node"]
+script = ExtResource("1_vyri4")
+
+[node name="Fond" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(320, 180)
+texture = ExtResource("1_4l452")
+metadata/_edit_lock_ = true
+
+[node name="Menurectangle" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(321, 181)
+texture = ExtResource("2_svuvx")
+metadata/_edit_lock_ = true
+
+[node name="Bouton" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(312, 184)
+texture = ExtResource("3_evd4d")
+
+[node name="Bouton2" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(313, 240)
+texture = ExtResource("3_evd4d")
+metadata/_edit_lock_ = true
+
+[node name="Button" type="Button" parent="."]
+show_behind_parent = true
+texture_filter = 1
+anchors_preset = -1
+anchor_left = 0.339
+anchor_top = 0.411
+anchor_right = 0.612
+anchor_bottom = 0.5
+offset_left = 0.0399933
+offset_top = 0.0399933
+offset_right = 0.319977
+text = "Jouer"
+flat = true
+script = SubResource("GDScript_afwlv")
+
+[node name="TextureButton" type="TextureButton" parent="."]
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="ResolutionDropdown" type="OptionButton" parent="."]
+offset_left = 229.0
+offset_top = 205.0
+offset_right = 379.0
+offset_bottom = 237.0
+
+[node name="ResolutionLabel" type="Label" parent="."]
+offset_left = 245.0
+offset_top = 209.0
+offset_right = 362.0
+offset_bottom = 232.0
+text = "Résolution"
+horizontal_alignment = 1
+vertical_alignment = 1

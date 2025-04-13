@@ -1,14 +1,19 @@
-[gd_scene load_steps=18 format=3 uid="uid://cmb10nia4vdeg"]
+[gd_scene load_steps=23 format=3 uid="uid://cmb10nia4vdeg"]
 
 [ext_resource type="Script" path="res://Fighter/Scenes/Player1/player_1.gd" id="1_thfdq"]
-[ext_resource type="PackedScene" uid="uid://d1rlt3xvr7qmk" path="res://Fighter/Scenes/Dash/Dash.tscn" id="2_bq546"]
 [ext_resource type="Texture2D" uid="uid://b6b1pc2byhwkf" path="res://Fighter/Sprites/PlayerRedAttack1.webp" id="3_bde0v"]
-[ext_resource type="Texture2D" uid="uid://c2ig7xw4hsv2i" path="res://Fighter/Sprites/PlayerRed.webp" id="3_mntjs"]
 [ext_resource type="Texture2D" uid="uid://c4jw2wv1dls2y" path="res://Fighter/Sprites/PlayerRedAttack2.webp" id="4_n0iyg"]
 [ext_resource type="Texture2D" uid="uid://d1d73kwclin2i" path="res://Fighter/Sprites/PlayerRedAttack3.webp" id="5_58r38"]
 [ext_resource type="Texture2D" uid="uid://bxyfx0rt1my2" path="res://Fighter/Sprites/PlayerRedAttack4.webp" id="6_3a023"]
 [ext_resource type="Texture2D" uid="uid://drghl44o4vr3i" path="res://Fighter/Sprites/PlayerRedAttack5.webp" id="7_28gxd"]
 [ext_resource type="Texture2D" uid="uid://cg2igjs3bpbqi" path="res://Fighter/Sprites/PlayerRedAttack6.webp" id="8_nfjfl"]
+[ext_resource type="Texture2D" uid="uid://ddmyuqux3856r" path="res://Fighter/Sprites/PlayerRedBigformat1.webp" id="9_6xn0x"]
+[ext_resource type="Texture2D" uid="uid://cctjigswb6a31" path="res://Fighter/Sprites/PlayerRedBigformat2.webp" id="10_n04rg"]
+[ext_resource type="Texture2D" uid="uid://b017ml6p1ee47" path="res://Fighter/Sprites/PlayerRedBigformat3.webp" id="11_r04xh"]
+[ext_resource type="Texture2D" uid="uid://dqyr746rr26fd" path="res://Fighter/Sprites/PlayerRedBigformat4.webp" id="12_mrvf5"]
+[ext_resource type="Texture2D" uid="uid://c1vqgyl31brpv" path="res://Fighter/Sprites/PlayerRedBigformat5.webp" id="13_jqbw7"]
+[ext_resource type="Texture2D" uid="uid://klxo7sxuiftp" path="res://Fighter/Sprites/PlayerRedBigformat6.webp" id="14_7i363"]
+[ext_resource type="Texture2D" uid="uid://bua6mp6vt31uo" path="res://Fighter/Sprites/PlayerRedBigformat7.webp" id="15_3k61g"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_lc1d8"]
 animations = [{
@@ -37,7 +42,33 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("3_mntjs")
+"texture": ExtResource("9_6xn0x")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_n04rg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_r04xh")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_mrvf5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_jqbw7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_7i363")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_3k61g")
+}],
+"loop": true,
+"name": &"attack2",
+"speed": 20.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("9_6xn0x")
 }],
 "loop": true,
 "name": &"idle",
@@ -49,15 +80,16 @@ radius = 20.2237
 
 [sub_resource type="Gradient" id="Gradient_lwnt6"]
 
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_we2u7"]
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_umhk8"]
 gradient = SubResource("Gradient_lwnt6")
 
 [sub_resource type="Gradient" id="Gradient_w1tkm"]
 
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_0xdbt"]
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_jimmy"]
 gradient = SubResource("Gradient_w1tkm")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_a06dl"]
+lifetime_randomness = 0.3
 particle_flag_disable_z = true
 initial_velocity_min = 20.0
 initial_velocity_max = 50.0
@@ -65,8 +97,8 @@ gravity = Vector3(0, -1, 0)
 scale_min = 2.0
 scale_max = 6.0
 color = Color(0.878906, 0.82655, 0.0411987, 1)
-color_ramp = SubResource("GradientTexture1D_0xdbt")
-color_initial_ramp = SubResource("GradientTexture1D_we2u7")
+color_ramp = SubResource("GradientTexture1D_jimmy")
+color_initial_ramp = SubResource("GradientTexture1D_umhk8")
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_aj17m"]
 radius = 25.0
@@ -76,14 +108,16 @@ rotation = 3.14159
 collision_layer = 4
 collision_mask = 11
 script = ExtResource("1_thfdq")
-dash_node = ExtResource("2_bq546")
+heal_cooldown_duration = 4.0
+max_speed = 100.0
 
 [node name="Player1" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
+position = Vector2(79, 4.0002)
 rotation = 1.5708
 scale = Vector2(0.5, 0.5)
 sprite_frames = SubResource("SpriteFrames_lc1d8")
-animation = &"idle"
+animation = &"attack2"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_1pk17")
@@ -91,11 +125,13 @@ shape = SubResource("CircleShape2D_1pk17")
 [node name="GhostTimer" type="Timer" parent="."]
 wait_time = 0.05
 
-[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+[node name="DashParticles" type="GPUParticles2D" parent="."]
 show_behind_parent = true
 emitting = false
 amount = 100
 process_material = SubResource("ParticleProcessMaterial_a06dl")
+one_shot = true
+speed_scale = 3.0
 trail_lifetime = 1.0
 
 [node name="HitboxArea" type="Area2D" parent="."]

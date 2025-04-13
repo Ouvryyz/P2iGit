@@ -1,8 +1,12 @@
-[gd_scene load_steps=2 format=3 uid="uid://cw1jpcssby0lg"]
+[gd_scene load_steps=3 format=3 uid="uid://cw1jpcssby0lg"]
 
 [ext_resource type="Script" path="res://GameController/game_controller.gd" id="1_sc6ct"]
+[ext_resource type="PackedScene" uid="uid://b2c2mja0nco7k" path="res://Grid/Scenes/SpawnCoin/SpawnCoin.tscn" id="2_33k86"]
 
 [node name="GameController" type="Node"]
 script = ExtResource("1_sc6ct")
 
 [node name="SceneHolder" type="Node" parent="."]
+
+[node name="SpawnCoin" parent="." instance=ExtResource("2_33k86")]
+visible = false
