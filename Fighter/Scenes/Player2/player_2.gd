@@ -47,7 +47,7 @@ func _ready() -> void:
 	await get_tree().create_timer(0.1).timeout 
 	hitbox.monitoring = false  
 
-	# Initialisation des PV
+	
 	if GameState.player2_health > 0 and GameState.player2_health <= max_health:
 		current_health = GameState.player2_health
 	else:

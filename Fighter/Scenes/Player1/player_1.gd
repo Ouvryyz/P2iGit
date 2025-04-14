@@ -190,7 +190,7 @@ func shoot_projectile():
 	if not can_shoot or not ShootScene:
 		return
 
-	can_shoot = false  # Bloque les tirs pendant le cooldown
+	can_shoot = false 
 
 	var projectile = ShootScene.instantiate()
 	get_parent().add_child(projectile)
@@ -227,17 +227,17 @@ func dash():
 	dash_direction = Last_direction.normalized()
 	dash_particles.emitting = true
 
-	# Lancer le cooldown visuel du dash via Game.gd
+	
 	if GameState.current_fighter_scene:
 		GameState.current_fighter_scene.start_dash_cooldown(dash_cooldown)
 
-	# Dash effectif pendant la durée définie
+	
 	await get_tree().create_timer(dash_duration).timeout
 
 	is_dashing = false
 	dash_particles.emitting = false
 
-	# Blocage du dash pendant la durée du cooldown logique
+	
 	await get_tree().create_timer(dash_cooldown).timeout
 	can_dash = true
 
