@@ -56,7 +56,15 @@ func _ready() -> void:
 	hitbox.monitorable = true  
 	await get_tree().create_timer(0.1).timeout 
 	hitbox.monitoring = false  
-	current_health = max_health
+
+	# Initialisation des PV sauvegardés
+	if GameState.player1_health > 0 and GameState.player1_health <= max_health:
+		current_health = GameState.player1_health
+	else:
+		current_health = max_health
+		GameState.player1_health = max_health
+
+	print("🔁 Player1 loaded health:", current_health)
 
 func _physics_process(delta: float) -> void:
 	if is_dashing:
@@ -114,14 +122,18 @@ func heal(amount: int) -> void:
 	if current_health > max_health:
 		current_health = max_health
 	print("Player1 soigné de ", amount, " points. Vie actuelle : ", current_health)
+	GameState.player1_health = current_health
 
 	if GameState.current_fighter_scene:
 		GameState.current_fighter_scene.update_player1_life_bar(current_health)
-		GameState.current_fighter_scene.start_cooldown()
+		GameState.current_fighter_scene.start_heal_cooldown()
+
 
 
 
 func take_damage(damage: int, attack_position: Vector2) -> void:
+	
+
 	current_health -= damage
 	print("Player1 a reçu ", damage, " points de dégâts. Vie restante : ", current_health)
 
@@ -130,7 +142,7 @@ func take_damage(damage: int, attack_position: Vector2) -> void:
 
 	if current_health <= 0:
 		die()
-
+	GameState.player1_health = current_health
 	if GameState.current_fighter_scene:
 		GameState.current_fighter_scene.update_player1_life_bar(current_health)
 

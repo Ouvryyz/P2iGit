@@ -4,10 +4,10 @@ const PUISSANCE4_SCENE := preload("res://Grid/Scenes/Logic/Logic.tscn")
 const FIGHTER_SCENE := preload("res://Fighter/Scenes/Game/Game.tscn")
 const PAUSE_MENU_SCENE := preload("res://GameController/PauseMenu.tscn") 
 
-var phase_order := [PUISSANCE4_SCENE, FIGHTER_SCENE, PUISSANCE4_SCENE, FIGHTER_SCENE]
+var phase_order := [PUISSANCE4_SCENE, FIGHTER_SCENE, PUISSANCE4_SCENE, FIGHTER_SCENE,PUISSANCE4_SCENE, FIGHTER_SCENE]
 var current_phase := 0
 
-const PHASE_DURATION := 10.0
+const PHASE_DURATION := 20.0
 
 @onready var scene_holder := $SceneHolder
 
@@ -24,29 +24,29 @@ func start_next_phase():
 
 	hide_all_jetons()
 
-	# Nettoyage des anciennes scènes
+	
 	for child in scene_holder.get_children():
 		child.queue_free()
 
-	# Instanciation de la nouvelle scène
+	
 	var scene_instance = phase_order[current_phase].instantiate()
 	scene_holder.add_child(scene_instance)
 
-	# Instanciation du menu pause global si non présent
+
 	if not get_node_or_null("/root/PauseMenu"):
 		var pause_instance = PAUSE_MENU_SCENE.instantiate()
 		get_tree().root.add_child(pause_instance)
 		pause_instance.name = "PauseMenu"
 
-	# Stocke la scène si c'est la phase de combat (Fighter)
+	
 	if phase_order[current_phase] == FIGHTER_SCENE:
 		GameState.current_fighter_scene = scene_instance
 
-		# Connexion au signal de défaite d’un joueur
+		
 		if scene_instance.has_signal("player_defeated"):
 			scene_instance.connect("player_defeated", Callable(self, "_on_player_defeated"))
 
-	# Connexion au signal de victoire si Puissance 4
+	
 	if phase_order[current_phase] == PUISSANCE4_SCENE:
 		if scene_instance.has_signal("puissance4_finished"):
 			scene_instance.connect("puissance4_finished", Callable(self, "_on_puissance4_finished"))
@@ -66,30 +66,28 @@ func _on_player_defeated(who: String):
 	get_tree().change_scene_to_file("res://GameController/Menu.tscn")
 
 func _on_puissance4_finished(outcome: String):
-	print("Fin de partie : victoire en Puissance 4.")
+	if outcome == "victory":
+		print("Victoire par score dans Puissance 4.")
+	elif outcome == "timeout":
+		print("Temps écoulé pour un joueur dans Puissance 4.")
+
 	await get_tree().create_timer(2.0).timeout
 	get_tree().change_scene_to_file("res://GameController/Menu.tscn")
+
 
 func hide_all_jetons():
 	for jeton in get_tree().get_nodes_in_group("Jetons"):
 		jeton.visible = false
 
 func save_puissance4_state():
-	var coins := get_tree().get_nodes_in_group("Jetons")
-	if coins == null or coins.is_empty():
-		print("⚠️ Aucun jeton trouvé, sauvegarde ignorée.")
-		return
-
+	var coins = get_tree().get_nodes_in_group("Jetons")
 	GameState.saved_jetons.clear()
 	for coin in coins:
-		if coin and coin.has_method("get_global_position") and coin.has_variable("coin_type"):
-			GameState.saved_jetons.append({
-				"position": coin.global_position,
-				"type": coin.coin_type
-			})
-	
-	var logic_node := scene_holder.get_node_or_null("Logic")
+		GameState.saved_jetons.append({
+			"position": coin.global_position,
+			"type": coin.coin_type
+		})
+
+	var logic_node = scene_holder.get_node("Logic")
 	if logic_node:
 		GameState.current_player = logic_node.current_player
-	else:
-		print("⚠️ Nœud 'Logic' introuvable, état du joueur non sauvegardé.")

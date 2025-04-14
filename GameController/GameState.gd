@@ -10,3 +10,6 @@ var player1_score: int = 0
 var player2_score: int = 0
 
 var current_fighter_scene: Node = null
+
+var player1_health: int = 100
+var player2_health: int = 100

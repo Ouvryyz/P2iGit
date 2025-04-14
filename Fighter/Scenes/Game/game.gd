@@ -96,6 +96,8 @@ var cooldown_duration := 4.0
 var is_cooling := false
 
 func _ready() -> void:
+	update_player1_life_bar(GameState.player1_health)
+	update_player2_life_bar(GameState.player2_health)
 	sprite.texture = cooldown_textures[0]
 	sprite.visible = true
 	label.visible = false

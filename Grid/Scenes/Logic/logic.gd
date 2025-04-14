@@ -161,10 +161,14 @@ func _format_time(time_left: float) -> String:
 	return "%02d:%02d" % [minutes, seconds]
 
 func _game_over(player: String):
-	print("Le joueur %s a perdu par le temps !" % player)
 	player1_timer.stop()
 	player2_timer.stop()
+	victory_label.text = "Le joueur %s a perdu par le temps !" % player
+	victory_popup.popup_centered()
+
+	await get_tree().create_timer(2.0).timeout
 	emit_signal("puissance4_finished", "timeout")
+
 
 
 func on_piece_spawn():
