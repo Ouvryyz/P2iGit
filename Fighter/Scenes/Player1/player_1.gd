@@ -126,7 +126,7 @@ func heal(amount: int) -> void:
 
 	if GameState.current_fighter_scene:
 		GameState.current_fighter_scene.update_player1_life_bar(current_health)
-		GameState.current_fighter_scene.start_heal_cooldown()
+		GameState.current_fighter_scene.start_cooldown()
 
 
 
